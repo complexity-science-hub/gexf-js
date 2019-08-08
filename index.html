@@ -55,6 +55,15 @@
                 <input id="searchinput" class="grey" autocomplete="off" />
                 <input id="searchsubmit" type="submit" />
             </form>
+
+            <div id="menuitem">
+                <label>Select Network:</label>
+                <select name="cars" class="selectmenu" onchange="changeGraph(this.value)">
+                    <option value="0">Male AG4</option>
+                    <option value="1">Male B2003</option>
+                </select>
+            </div>
+
         </div>
         <ul id="autocomplete">
         </ul>
