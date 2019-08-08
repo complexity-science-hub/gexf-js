@@ -1163,7 +1163,7 @@
         GexfJS.ctxMini = document.getElementById('overview').getContext('2d');
         updateWorkspaceBounds();
 
-        initializeMap();
+        // initializeMap();
 
         window.onhashchange = initializeMap;
 

@@ -1,42 +1,31 @@
 /*** USE THIS FILE TO SET OPTIONS ***/
 
-var graphFiles = ["./data/Female_2003.gexf", "./data/Female_2005.gexf", "./data/Female_2007.gexf", "./data/Female_2009.gexf", "./data/Female_2011.gexf", "./data/Female_2013.gexf", "./data/Female_AG1.gexf", "./data/Female_AG2.gexf", "./data/Female_AG3.gexf", "./data/Female_AG4.gexf", "./data/Female_AG5.gexf", "./data/Female_AG6.gexf", "./data/Female_AG7.gexf", "./data/Female_AG8.gexf", "./data/Male_2003.gexf", "./data/Male_2005.gexf", "./data/Male_2007.gexf", "./data/Male_2009.gexf", "./data/Male_2011.gexf", "./data/Male_2013.gexf", "./data/Male_AG1.gexf", "./data/Male_AG2.gexf", "./data/Male_AG3.gexf", "./data/Male_AG4.gexf", "./data/Male_AG5.gexf", "./data/Male_AG6.gexf", "./data/Male_AG7.gexf", "./data/Male_AG8.gexf"];
-var graphFile = graphFiles[0];
-
-
-// graphFiles.push("Graph_Male_agegroup4.gexf");
-// graphFiles.push("Graph_Male_Blocks_2003.gexf");
-
+var graphFiles;
+var graphFile;
 
 function getFileList(path) {
 
     var fileList = [];
-    var win = window
 
 // get auto-generated page
     $.ajax({url: path}).then(function(html) {
         // create temporary DOM element
         var document = $(html);
 
-        // find all links ending with .pdf
+        // find all links ending with .gexf
         document.find('a[href$=".gexf"]').each(function() {
-            var pdfName = "./data/" + $(this).text();
+            var grphname = "./data/" + $(this).text();
 
-            // do what you want here
-            fileList.push(pdfName);
-        })
-        console.log(fileList)
+            fileList.push(grphname);
+        });
+        // console.log(fileList)
 
         graphFiles = fileList;
-        graphFile = fileList[0];
 
-        GexfJS.setParams(
-            gparams
-        );
-        console.log(window)
-        win.onhashchange
+        setupSelector();
+
+        changeGraph(0);
     });
-
 }
 
 
@@ -122,10 +111,6 @@ const gparams = {
 }
 
 
-GexfJS.setParams(
-    gparams
-);
-
 function changeGraph(selection)
 {
     gparams.graphFile = graphFiles[selection];
@@ -149,5 +134,4 @@ function setupSelector() {
         option.value = i;
         x.add(option);
     }
-
 }

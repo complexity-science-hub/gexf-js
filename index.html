@@ -47,6 +47,7 @@
             </div>
             <div id="leftcontent"></div>
         </div>
+
         <div id="titlebar">
             <div id="maintitle">
                 <h1><a href="http://gephi.org/" target="_blank" title="Made with Gephi">Gephi: JavaScript GEXF Viewer</a></h1>
@@ -58,13 +59,17 @@
 
             <div id="menuitem">
                 <label>Select Network:</label>
-                <select name="cars" class="selectmenu" onchange="changeGraph(this.value)">
-                    <option value="0">Male AG4</option>
-                    <option value="1">Male B2003</option>
+                <select id="graphselector" name="graphfiles" class="selectmenu" onchange="changeGraph(this.value)">
                 </select>
             </div>
 
         </div>
+
+        <script>
+            getFileList("./data");
+
+        </script>
+
         <ul id="autocomplete">
         </ul>
     </body>
