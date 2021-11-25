@@ -302,6 +302,22 @@
             }
             for (var i = 0, l = _d.a.length; i < l; i++) {
                 var attr = _d.a[i];
+                let subs = attr[0].substr(0,3)
+
+                //skip standard attributes
+                if(subs === "att") continue;
+
+                //parse numbers properly
+                if(!isNaN(attr[1])){
+                    if(!Number.isInteger(attr[1]))
+                        // attr[1] = parseFloat(attr[1]).toFixed(2)
+                        // console.log("parseInt", attr[0])
+                    if (attr[1] % 1 === 0)
+                        attr[1] = parseFloat(attr[1]).toFixed(0);
+                    else
+                        attr[1] = parseFloat(attr[1]).toFixed(2);
+                }
+
                 var _li = $("<li>");
                 var attrkey = GexfJS.graph.attributes[attr[0]];
                 $("<b>").text(strLang(attrkey) + ": ").appendTo(_li);
@@ -309,7 +325,8 @@
                     $('<br>').appendTo(_li);
                     $('<img>').attr("src", attr[1]).appendTo(_li).addClass("attrimg");
                 } else {
-                    _li.append(replaceURLWithHyperlinks(attr[1]));
+                    // _li.append(replaceURLWithHyperlinks(attr[1]));
+                    _li.append(attr[1]);
                 }
                 _li.appendTo(_ul);
             }
@@ -336,7 +353,7 @@
                         $('<span>').text(" – " + _e.l).appendTo(_li);
                     }
                     if (GexfJS.params.showEdgeWeight) {
-                        $('<span>').text(" (" + _e.w + ")").appendTo(_li);
+                        $('<span>').text(" (" + _e.w.toFixed(2) + ")").appendTo(_li);
                     }
                     if (_e.d) {
                         _str_in.push(_li);
@@ -363,7 +380,7 @@
                         $('<span>').text(" – " + _e.l).appendTo(_li);
                     }
                     if (GexfJS.params.showEdgeWeight) {
-                        $('<span>').text(" (" + _e.w + ")").appendTo(_li);
+                        $('<span>').text(" (" + _e.w.toFixed(2) + ")").appendTo(_li);
                     }
                     if (_e.d) {
                         _str_out.push(_li);
